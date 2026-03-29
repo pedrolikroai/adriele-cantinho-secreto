@@ -1,64 +1,79 @@
 import { motion } from "framer-motion";
 import heroImg from "@/assets/adriele-hero.jpg";
+import { BadgeCheck, MessageCircle, Instagram, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
   return (
     <section id="inicio" className="pt-16">
-      <div className="container py-16 md:py-24">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="order-2 md:order-1"
-          >
-            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4">
+      <div className="container max-w-lg mx-auto py-10 md:py-14">
+        {/* Profile header — inspired by profile page layout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center"
+        >
+          {/* Profile photo with ring */}
+          <div className="relative mb-5">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-[hsl(var(--rose))] via-[hsl(var(--gold)/0.5)] to-[hsl(var(--nude))] p-[3px]" />
+            <img
+              src={heroImg}
+              alt="Adriele Leite"
+              width={800}
+              height={1024}
+              className="relative w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-[3px] border-background"
+            />
+          </div>
+
+          {/* Name + verified badge */}
+          <div className="flex items-center gap-1.5 mb-1">
+            <h1 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
               Adriele Leite
-            </p>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.4rem] leading-tight font-semibold text-foreground mb-6">
-              Um cantinho com meus achadinhos, promoções e dicas que realmente valem a pena.
             </h1>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-              Aqui eu reúno com carinho tudo o que facilita o dia a dia: favoritos, promoções e indicações que eu gosto de verdade.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="#achadinhos"
-                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                Ver achadinhos
-              </a>
+            <BadgeCheck size={22} className="text-[hsl(var(--gold))] fill-[hsl(var(--gold))] mt-0.5" />
+          </div>
+
+          {/* Handle / positioning phrase */}
+          <p className="text-sm font-medium text-muted-foreground tracking-wide mb-3">
+            Rotina real, dicas e achadinhos
+          </p>
+
+          {/* Mini bio */}
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-6">
+            Aqui eu reúno com carinho tudo o que facilita o dia a dia: favoritos, promoções e indicações que eu gosto de verdade.
+          </p>
+
+          {/* Action buttons */}
+          <div className="flex flex-col w-full gap-2.5 max-w-xs">
+            <a
+              href="#achadinhos"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              <Sparkles size={16} />
+              Ver achadinhos
+            </a>
+            <div className="flex gap-2.5">
               <a
                 href="https://wa.me/557788348334"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+                className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
               >
-                Falar no WhatsApp
+                <MessageCircle size={16} />
+                WhatsApp
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+              >
+                <Instagram size={16} />
+                Instagram
               </a>
             </div>
-          </motion.div>
-
-          {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="order-1 md:order-2 flex justify-center"
-          >
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-[2rem] bg-rose/60 -z-10" />
-              <img
-                src={heroImg}
-                alt="Adriele Leite"
-                width={800}
-                height={1024}
-                className="w-72 md:w-80 lg:w-96 rounded-[1.5rem] object-cover shadow-lg"
-              />
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
