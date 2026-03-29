@@ -545,11 +545,21 @@ const Admin = () => {
                 </p>
               </div>
             </EditableBlock>
-            <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden opacity-70 pointer-events-none">
-              <img src={img1} alt="" className="w-full aspect-square object-cover" />
-              <img src={img2} alt="" className="w-full aspect-square object-cover" />
-              <img src={img3} alt="" className="w-full aspect-square object-cover" />
-            </div>
+            <EditableBlock
+              label="Editar imagens"
+              onClick={() => openEdit({
+                type: 'site_content',
+                item: siteContent['selecoes'] || { section_key: 'selecoes' },
+                label: 'Imagens das Seleções',
+                fields: siteContentFields,
+              })}
+            >
+              <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden">
+                <img src={img1} alt="" className="w-full aspect-square object-cover" />
+                <img src={img2} alt="" className="w-full aspect-square object-cover" />
+                <img src={img3} alt="" className="w-full aspect-square object-cover" />
+              </div>
+            </EditableBlock>
           </div>
         </section>
 
