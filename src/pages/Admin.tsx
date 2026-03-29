@@ -277,11 +277,24 @@ const Admin = () => {
                 </div>
               </EditableBlock>
 
-              {/* Name */}
-              <div className="flex items-center gap-1.5 mb-1">
-                <h1 className="font-heading text-2xl font-semibold text-foreground">Adriele Leite</h1>
-                <BadgeCheck size={22} className="text-[hsl(var(--gold))] fill-[hsl(var(--gold))] mt-0.5" />
-              </div>
+              {/* Name - editable */}
+              <EditableBlock
+                label="Editar nome"
+                className="mb-1"
+                onClick={() => openEdit({
+                  type: 'site_content',
+                  item: siteContent['hero'] || { section_key: 'hero' },
+                  label: 'Textos do perfil',
+                  fields: siteContentFields,
+                })}
+              >
+                <div className="flex items-center gap-1.5">
+                  <h1 className="font-heading text-2xl font-semibold text-foreground">
+                    {sc('hero', 'title') || 'Adriele Leite'}
+                  </h1>
+                  <BadgeCheck size={22} className="text-[hsl(var(--gold))] fill-[hsl(var(--gold))] mt-0.5" />
+                </div>
+              </EditableBlock>
 
               {/* Bio text - editable */}
               <EditableBlock
@@ -302,20 +315,34 @@ const Admin = () => {
                 </p>
               </EditableBlock>
 
-              {/* Buttons preview */}
-              <div className="flex flex-col w-full gap-2.5 max-w-xs pointer-events-none opacity-70">
-                <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold">
-                  <Sparkles size={16} /> Ver achadinhos
-                </div>
-                <div className="flex gap-2.5">
-                  <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
-                    <MessageCircle size={16} /> WhatsApp
+              {/* Buttons - editable */}
+              <EditableBlock
+                label="Editar botões"
+                onClick={() => openEdit({
+                  type: 'site_content',
+                  item: siteContent['hero'] || { section_key: 'hero' },
+                  label: 'Botões e links do perfil',
+                  fields: [
+                    ...siteContentFields,
+                    { key: 'link', label: 'Link do WhatsApp', type: 'url' as const },
+                  ],
+                })}
+                className="w-full max-w-xs"
+              >
+                <div className="flex flex-col w-full gap-2.5">
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold">
+                    <Sparkles size={16} /> Ver achadinhos
                   </div>
-                  <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
-                    <Instagram size={16} /> Instagram
+                  <div className="flex gap-2.5">
+                    <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
+                      <MessageCircle size={16} /> WhatsApp
+                    </div>
+                    <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
+                      <Instagram size={16} /> Instagram
+                    </div>
                   </div>
                 </div>
-              </div>
+              </EditableBlock>
             </div>
           </div>
         </section>
@@ -323,26 +350,36 @@ const Admin = () => {
         {/* ═══════ HIGHLIGHTS ═══════ */}
         <section className="py-6">
           <div className="container max-w-lg mx-auto">
-            <div className="flex justify-between gap-2 px-2 opacity-70 pointer-events-none">
-              {[
-                { icon: Sparkles, label: 'Achadinhos' },
-                { icon: Tag, label: 'Promoções' },
-                { icon: Heart, label: 'Favoritos' },
-                { icon: Instagram, label: 'Instagram' },
-                { icon: MessageCircle, label: 'WhatsApp' },
-                { icon: Handshake, label: 'Parcerias' },
-              ].map((h) => (
-                <div key={h.label} className="flex flex-col items-center gap-1.5 min-w-[50px]">
-                  <div className="relative">
-                    <div className="absolute -inset-[2px] rounded-full bg-gradient-to-br from-[hsl(var(--gold)/0.6)] to-[hsl(var(--rose))]" />
-                    <div className="relative w-[48px] h-[48px] rounded-full bg-card border-[2px] border-background flex items-center justify-center">
-                      <h.icon size={18} className="text-foreground/70" strokeWidth={1.5} />
+            <EditableBlock
+              label="Editar destaques"
+              onClick={() => openEdit({
+                type: 'site_content',
+                item: siteContent['hero'] || { section_key: 'hero' },
+                label: 'Links dos destaques',
+                fields: siteContentFields,
+              })}
+            >
+              <div className="flex justify-between gap-2 px-2">
+                {[
+                  { icon: Sparkles, label: 'Achadinhos' },
+                  { icon: Tag, label: 'Promoções' },
+                  { icon: Heart, label: 'Favoritos' },
+                  { icon: Instagram, label: 'Instagram' },
+                  { icon: MessageCircle, label: 'WhatsApp' },
+                  { icon: Handshake, label: 'Parcerias' },
+                ].map((h) => (
+                  <div key={h.label} className="flex flex-col items-center gap-1.5 min-w-[50px]">
+                    <div className="relative">
+                      <div className="absolute -inset-[2px] rounded-full bg-gradient-to-br from-[hsl(var(--gold)/0.6)] to-[hsl(var(--rose))]" />
+                      <div className="relative w-[48px] h-[48px] rounded-full bg-card border-[2px] border-background flex items-center justify-center">
+                        <h.icon size={18} className="text-foreground/70" strokeWidth={1.5} />
+                      </div>
                     </div>
+                    <span className="text-[9px] font-medium text-muted-foreground">{h.label}</span>
                   </div>
-                  <span className="text-[9px] font-medium text-muted-foreground">{h.label}</span>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </EditableBlock>
           </div>
         </section>
 
@@ -508,11 +545,21 @@ const Admin = () => {
                 </p>
               </div>
             </EditableBlock>
-            <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden opacity-70 pointer-events-none">
-              <img src={img1} alt="" className="w-full aspect-square object-cover" />
-              <img src={img2} alt="" className="w-full aspect-square object-cover" />
-              <img src={img3} alt="" className="w-full aspect-square object-cover" />
-            </div>
+            <EditableBlock
+              label="Editar imagens"
+              onClick={() => openEdit({
+                type: 'site_content',
+                item: siteContent['selecoes'] || { section_key: 'selecoes' },
+                label: 'Imagens das Seleções',
+                fields: siteContentFields,
+              })}
+            >
+              <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden">
+                <img src={img1} alt="" className="w-full aspect-square object-cover" />
+                <img src={img2} alt="" className="w-full aspect-square object-cover" />
+                <img src={img3} alt="" className="w-full aspect-square object-cover" />
+              </div>
+            </EditableBlock>
           </div>
         </section>
 
