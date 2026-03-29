@@ -10,7 +10,7 @@ const Footer = () => {
           Rotina real, dicas e achadinhos · © {new Date().getFullYear()}
         </p>
         <Link
-          to="/admin/login"
+          to="/painel"
           className="inline-flex items-center gap-1 text-[10px] text-muted-foreground/40 hover:text-muted-foreground transition-colors"
           aria-label="Área administrativa"
         >
