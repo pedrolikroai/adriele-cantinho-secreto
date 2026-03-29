@@ -350,26 +350,36 @@ const Admin = () => {
         {/* ═══════ HIGHLIGHTS ═══════ */}
         <section className="py-6">
           <div className="container max-w-lg mx-auto">
-            <div className="flex justify-between gap-2 px-2 opacity-70 pointer-events-none">
-              {[
-                { icon: Sparkles, label: 'Achadinhos' },
-                { icon: Tag, label: 'Promoções' },
-                { icon: Heart, label: 'Favoritos' },
-                { icon: Instagram, label: 'Instagram' },
-                { icon: MessageCircle, label: 'WhatsApp' },
-                { icon: Handshake, label: 'Parcerias' },
-              ].map((h) => (
-                <div key={h.label} className="flex flex-col items-center gap-1.5 min-w-[50px]">
-                  <div className="relative">
-                    <div className="absolute -inset-[2px] rounded-full bg-gradient-to-br from-[hsl(var(--gold)/0.6)] to-[hsl(var(--rose))]" />
-                    <div className="relative w-[48px] h-[48px] rounded-full bg-card border-[2px] border-background flex items-center justify-center">
-                      <h.icon size={18} className="text-foreground/70" strokeWidth={1.5} />
+            <EditableBlock
+              label="Editar destaques"
+              onClick={() => openEdit({
+                type: 'site_content',
+                item: siteContent['hero'] || { section_key: 'hero' },
+                label: 'Links dos destaques',
+                fields: siteContentFields,
+              })}
+            >
+              <div className="flex justify-between gap-2 px-2">
+                {[
+                  { icon: Sparkles, label: 'Achadinhos' },
+                  { icon: Tag, label: 'Promoções' },
+                  { icon: Heart, label: 'Favoritos' },
+                  { icon: Instagram, label: 'Instagram' },
+                  { icon: MessageCircle, label: 'WhatsApp' },
+                  { icon: Handshake, label: 'Parcerias' },
+                ].map((h) => (
+                  <div key={h.label} className="flex flex-col items-center gap-1.5 min-w-[50px]">
+                    <div className="relative">
+                      <div className="absolute -inset-[2px] rounded-full bg-gradient-to-br from-[hsl(var(--gold)/0.6)] to-[hsl(var(--rose))]" />
+                      <div className="relative w-[48px] h-[48px] rounded-full bg-card border-[2px] border-background flex items-center justify-center">
+                        <h.icon size={18} className="text-foreground/70" strokeWidth={1.5} />
+                      </div>
                     </div>
+                    <span className="text-[9px] font-medium text-muted-foreground">{h.label}</span>
                   </div>
-                  <span className="text-[9px] font-medium text-muted-foreground">{h.label}</span>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </EditableBlock>
           </div>
         </section>
 
