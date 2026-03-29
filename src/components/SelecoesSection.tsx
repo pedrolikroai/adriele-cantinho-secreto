@@ -11,46 +11,49 @@ const items = [
 
 const SelecoesSection = () => {
   return (
-    <section id="selecoes" className="py-16 md:py-24 bg-card/50">
-      <div className="container">
+    <section id="selecoes" className="py-10 md:py-16">
+      <div className="container max-w-lg mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-6"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground">
+          <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
             Seleções da Semana
           </h2>
-          <p className="text-muted-foreground mt-2">O que estou indicando esta semana</p>
+          <p className="text-muted-foreground text-sm mt-1">O que estou indicando esta semana</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
+        {/* Grid-style posts layout */}
+        <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden">
           {items.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="group cursor-pointer"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group relative cursor-pointer"
             >
-              <div className="overflow-hidden rounded-2xl mb-4">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  loading="lazy"
-                  width={640}
-                  height={640}
-                  className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              <img
+                src={item.img}
+                alt={item.title}
+                loading="lazy"
+                width={640}
+                height={640}
+                className="w-full aspect-square object-cover group-hover:brightness-75 transition-all duration-300"
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2">
+                <span className="text-primary-foreground text-xs font-semibold text-center leading-tight drop-shadow-md">
+                  {item.title}
+                </span>
               </div>
-              <h3 className="font-heading text-xl font-semibold text-foreground">{item.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
             </motion.div>
           ))}
         </div>
+        <p className="text-xs text-muted-foreground mt-3 text-center">Toque para explorar cada seleção</p>
       </div>
     </section>
   );
