@@ -277,11 +277,24 @@ const Admin = () => {
                 </div>
               </EditableBlock>
 
-              {/* Name */}
-              <div className="flex items-center gap-1.5 mb-1">
-                <h1 className="font-heading text-2xl font-semibold text-foreground">Adriele Leite</h1>
-                <BadgeCheck size={22} className="text-[hsl(var(--gold))] fill-[hsl(var(--gold))] mt-0.5" />
-              </div>
+              {/* Name - editable */}
+              <EditableBlock
+                label="Editar nome"
+                className="mb-1"
+                onClick={() => openEdit({
+                  type: 'site_content',
+                  item: siteContent['hero'] || { section_key: 'hero' },
+                  label: 'Textos do perfil',
+                  fields: siteContentFields,
+                })}
+              >
+                <div className="flex items-center gap-1.5">
+                  <h1 className="font-heading text-2xl font-semibold text-foreground">
+                    {sc('hero', 'title') || 'Adriele Leite'}
+                  </h1>
+                  <BadgeCheck size={22} className="text-[hsl(var(--gold))] fill-[hsl(var(--gold))] mt-0.5" />
+                </div>
+              </EditableBlock>
 
               {/* Bio text - editable */}
               <EditableBlock
@@ -302,20 +315,34 @@ const Admin = () => {
                 </p>
               </EditableBlock>
 
-              {/* Buttons preview */}
-              <div className="flex flex-col w-full gap-2.5 max-w-xs pointer-events-none opacity-70">
-                <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold">
-                  <Sparkles size={16} /> Ver achadinhos
-                </div>
-                <div className="flex gap-2.5">
-                  <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
-                    <MessageCircle size={16} /> WhatsApp
+              {/* Buttons - editable */}
+              <EditableBlock
+                label="Editar botões"
+                onClick={() => openEdit({
+                  type: 'site_content',
+                  item: siteContent['hero'] || { section_key: 'hero' },
+                  label: 'Botões e links do perfil',
+                  fields: [
+                    ...siteContentFields,
+                    { key: 'link', label: 'Link do WhatsApp', type: 'url' as const },
+                  ],
+                })}
+                className="w-full max-w-xs"
+              >
+                <div className="flex flex-col w-full gap-2.5">
+                  <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold">
+                    <Sparkles size={16} /> Ver achadinhos
                   </div>
-                  <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
-                    <Instagram size={16} /> Instagram
+                  <div className="flex gap-2.5">
+                    <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
+                      <MessageCircle size={16} /> WhatsApp
+                    </div>
+                    <div className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-border text-foreground text-sm font-medium">
+                      <Instagram size={16} /> Instagram
+                    </div>
                   </div>
                 </div>
-              </div>
+              </EditableBlock>
             </div>
           </div>
         </section>
