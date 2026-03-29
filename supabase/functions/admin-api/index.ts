@@ -72,9 +72,18 @@ serve(async (req) => {
     switch (req.method) {
       case 'GET': {
         if (id) {
-          result = await supabase.from(table).select('*').eq('id', id).single();
+          result = await supabase.from(table).select('*').eq('id', id).maybeSingle();
         } else {
-          result = await supabase.from(table).select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+          const tablesWithSortOrder = ['achadinhos', 'promocoes', 'favoritos'];
+          let query = supabase.from(table).select('*');
+          if (tablesWithSortOrder.includes(table)) {
+            query = query.order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+          } else if (table === 'site_content') {
+            query = query.order('section_key', { ascending: true });
+          } else {
+            query = query.order('created_at', { ascending: false });
+          }
+          result = await query;
         }
         break;
       }
